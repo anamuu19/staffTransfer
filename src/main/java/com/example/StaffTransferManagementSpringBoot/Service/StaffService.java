@@ -14,26 +14,28 @@ public class StaffService {
   @Autowired
   public StaffRepository staffRepository;
 
-  public String addStaff(Staff staff){
-    staffRepository.save(staff);
-    return "success";
+  public Staff addStaff(Staff staff){
+    return staffRepository.save(staff);
   }
 
   public List<?> getAllStaff(){
     return staffRepository.findAll();
 
   }
-  public Optional<?> findById(int staffId){
-    return staffRepository.findById(staffId);
+  public Optional<?> findById(int id){
+    return staffRepository.findById(id);
   }
 
-  public Staff updateStaff(Staff staff,int staffId){
-    Staff staff1 = staffRepository.findById(staffId).get();
+  public Staff updateStaff(Staff staff,int id){
+    Staff staff1 = staffRepository.findById(id).get();
     staff1.setFirstName(staff.getFirstName());
+    staff1.setMiddleName(staff.getMiddleName());
     staff1.setAddress(staff.getAddress());
     staff1.setLastName(staff.getLastName());
     staff1.setEmail(staff.getEmail());
     staff1.setPhoneNumber(staff.getPhoneNumber());
+    staff1.setGender(staff.getGender());
+//    staff1.setInstitution(staff.getInstitution());
     Staff updateStaff = staffRepository.save(staff1);
     return updateStaff;
   }

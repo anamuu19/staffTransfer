@@ -13,18 +13,25 @@ public class Staff {
   private int id;
 
   @Column(name = "FirstName")
-  private String FirstName;
+  private String firstName;
+  @Column(name = "MiddleName")
+  private String middleName;
   @Column(name = "LastName")
-  private String LastName;
+  private String lastName;
   @Column(name = "Email")
-  private String Email;
+  private String email;
   @Column(name = "Address")
-  private String Address;
+  private String address;
   @Column(name = "PhoneNumber")
-  private String PhoneNumber;
+  private String phoneNumber;
+  @Column(name = "Gender")
   private String gender;
-  @ManyToOne
-  @JoinColumn(name = "institution_id", referencedColumnName = "institution_id")
-  private Institution institution;
+  @Column(name = "Institution")
+  private String institution;
+
+
+//  @ManyToOne
+//  @JoinColumn(name = "institution_id", referencedColumnName = "institution_id")
+//  private Institution institution_id;
 
 }

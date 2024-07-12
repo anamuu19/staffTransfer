@@ -7,14 +7,14 @@ import lombok.Data;
 public class ManagerRequest {
 
 
-  private String FirstName;
-  private String MiddleName;
-  private String LastName;
-  private String Email;
-  private String PhoneNumber;
-  private String Address;
-  private String gender;
-  private int institutionId;
+//  private String FirstName;
+//  private String MiddleName;
+//  private String LastName;
+//  private String Email;
+//  private String PhoneNumber;
+//  private String Address;
+//  private String gender;
+//  private int institutionId;
 
 
 }

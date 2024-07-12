@@ -11,10 +11,10 @@ public class Institution {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "institution_id")
   private int id;
-  private String Name;
-  private String Address;
-  private String Email;
-  private String PhoneNumber;
+  private String name;
+  private String address;
+  private String email;
+  private String phoneNumber;
 
 
 }

@@ -2,8 +2,8 @@ package com.example.StaffTransferManagementSpringBoot.Service;
 
 import com.example.StaffTransferManagementSpringBoot.Model.Institution;
 import com.example.StaffTransferManagementSpringBoot.Model.Manager;
+import com.example.StaffTransferManagementSpringBoot.Repository.InstitutionRepository;
 import com.example.StaffTransferManagementSpringBoot.Repository.ManagerRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,31 +16,42 @@ public class ManagerService {
   @Autowired
   private ManagerRepository managerRepository;
 
-//  @Autowired
-//  private ModelMapper modelMapper;
+  @Autowired
+  private InstitutionRepository institutionRepository;
 
-  public List<Manager> getAllManager(){
+  public List<Manager> getAllManager() {
     return managerRepository.findAll();
-
   }
-  public Optional<?> findById(int managerID){
+
+  public Optional<?> findById(int managerID) {
     return managerRepository.findById(managerID);
   }
 
-  public String addManager(Manager manager){
-    managerRepository.save(manager);
-    return "success";
+  public Manager addManager(Manager manager) {
+    return managerRepository.save(manager);
   }
 
-  public Manager updateManager(Manager manager,int id){
-    Manager manager1 = managerRepository.findById(id).get();
-    manager1.setFirstName(manager.getFirstName());
-    manager1.setLastName(manager.getLastName());
-    manager1.setAddress(manager.getAddress());
-    manager1.setEmail(manager.getEmail());
-    manager1.setPhoneNumber(manager.getPhoneNumber());
-    Manager updateManager = managerRepository.save(manager1);
-    return updateManager;
-  }
+  public Manager updateManager(Manager manager, int id) {
+    Manager existingManager = managerRepository.findById(id).orElseThrow(() -> new RuntimeException("Manager not found"));
+    existingManager.setFirstName(manager.getFirstName());
+    existingManager.setMiddleName(manager.getMiddleName());
+    existingManager.setLastName(manager.getLastName());
+    existingManager.setAddress(manager.getAddress());
+    existingManager.setEmail(manager.getEmail());
+    existingManager.setPhoneNumber(manager.getPhoneNumber());
+    existingManager.setGender(manager.getGender());
 
+    // Check if the institution exists
+    Institution institution = manager.getInstitution();
+    if (institution != null) {
+      Institution existingInstitution = institutionRepository.findById(institution.getId()).orElse(null);
+      if (existingInstitution == null) {
+        // Save the new institution
+        existingInstitution = institutionRepository.save(institution);
+      }
+      existingManager.setInstitution(existingInstitution);
+    }
+
+    return managerRepository.save(existingManager);
+  }
 }

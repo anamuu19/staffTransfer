@@ -13,21 +13,45 @@ public class Request {
   @Column(name="request_id")
   private int id;
 
-  @ManyToOne
-  @JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
-  private Staff staff;
-  @ManyToOne
-  @JoinColumn(name = "institution_id", referencedColumnName = "institution_id")
-  private Institution institution;
-  @ManyToOne
-  @JoinColumn(name = "manager_id",referencedColumnName = "manager_id")
-  private Manager manager;
+  @Column(name = "First_name")
+  private String firstName;
+  @Column(name = "Middle_name")
+  private String middleName;
+  @Column(name = "Last_name")
+  private String lastName;
+  @Column(name = "Email")
+  private String email;
+  @Column(name = "Phone_Number")
+  private String phoneNumber;
+  @Column(name = "Address")
+  private String address;
+  @Column(name = "Gender")
+  private String gender;
 
-  @Column(name = "Reason_For_Submission")
-  private String Reason_For_Submission;
+  @Column(name = "Current_Institution")
+  private String current_institution;
+  @Column(name = "Desired_Institution")
+  private String institution;
+  @Column(name = "Reason_For_Transfer")
+  private String reason_for_transfer;
   @Column(name = "Date_Of_Submission")
-  private String Date;
+  private String date;
+//  @Column(name = "Status")
+//  private String Status;
 
-  private String Status;
+
+
+//  @ManyToOne
+//  @JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
+//  private Staff staff;
+
+//  @ManyToOne
+//  @JoinColumn(name = "institution_id", referencedColumnName = "institution_id")
+//  private Institution institution;
+//  @ManyToOne
+//  @JoinColumn(name = "manager_id",referencedColumnName = "manager_id")
+//  private Manager manager;
+
+
 
 }

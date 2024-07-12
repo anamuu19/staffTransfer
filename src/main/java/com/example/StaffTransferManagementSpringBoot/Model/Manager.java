@@ -11,14 +11,19 @@ public class Manager {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "manager_id")
-  private int id;
-  private String FirstName;
-  private String MiddleName;
-  private String LastName;
-  private String Email;
-  private String PhoneNumber;
-  private String Address;
+  private Integer id;
+  private String firstName;
+  private String middleName;
+  private String lastName;
+  private String email;
+  private String phoneNumber;
+  private String address;
   private String gender;
+//  @ManyToOne
+//  @JoinColumn(name = "institution_id", referencedColumnName = "institution_id")
+//  private Institution institution;
+
+//  private String institution;
   @ManyToOne
   @JoinColumn(name = "institution_id", referencedColumnName = "institution_id")
   private Institution institution;
