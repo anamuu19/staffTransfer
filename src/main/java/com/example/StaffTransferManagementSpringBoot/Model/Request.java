@@ -36,9 +36,23 @@ public class Request {
   private String reason_for_transfer;
   @Column(name = "Date_Of_Submission")
   private String date;
-//  @Column(name = "Status")
-//  private String Status;
+  @Column(name = "Comment")
+  private String comment;
+  @Column(name = "Status")
+  private String status;
 
+//  @ManyToOne
+//  @JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
+//  private Staff staff;
+
+
+  public String getCurrent_institution() {
+    return current_institution;
+  }
+
+  public void setCurrent_institution(String current_institution) {
+    this.current_institution = current_institution;
+  }
 
 
 //  @ManyToOne

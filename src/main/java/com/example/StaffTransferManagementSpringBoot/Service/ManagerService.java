@@ -54,4 +54,8 @@ public class ManagerService {
 
     return managerRepository.save(existingManager);
   }
+
+  public Long getCount(){
+    return managerRepository.count();
+  }
 }

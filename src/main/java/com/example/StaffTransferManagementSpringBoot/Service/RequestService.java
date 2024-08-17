@@ -2,7 +2,9 @@ package com.example.StaffTransferManagementSpringBoot.Service;
 
 import com.example.StaffTransferManagementSpringBoot.Model.Request;
 //import com.example.StaffTransferManagementSpringBoot.Model.Staff;
+import com.example.StaffTransferManagementSpringBoot.Model.Staff;
 import com.example.StaffTransferManagementSpringBoot.Repository.RequestRepository;
+import com.example.StaffTransferManagementSpringBoot.Repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,15 @@ public class RequestService {
     @Autowired
     public RequestRepository requestRepository;
 
+//    @Autowired
+//    private StaffRepository staffRepository;
+
+//    public List<Request> getRequestsByStaffId(int staffId) {
+//        Staff staff = staffRepository.findById(staffId)
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid staff ID"));
+//        return requestRepository.findAllByStaff(staff);
+//    }
+
     public Request addRequest(Request request){
         return requestRepository.save(request);
     }
@@ -23,6 +34,9 @@ public class RequestService {
         return requestRepository.findAll();
 
     }
+//    public List<Request> getRequestsByStaffId(int id) {
+//        return requestRepository.findAllByStaffId(id);
+//    }
 
     public Optional<?> findById(int id){
         return requestRepository.findById(id);
@@ -45,6 +59,24 @@ public class RequestService {
         Request updateRequest = requestRepository.save(req);
         return updateRequest;
 
+    }
+
+
+
+    public Request confirmRequest(int id,Request request) {
+        Request existingRequest = requestRepository.findById(id).orElseThrow();
+        existingRequest.setStatus("accepted");  // Admin confirms final acceptance
+        return requestRepository.save(existingRequest);
+    }
+
+    public Request rejectRequest(int id,Request request) {
+        Request existingRequest = requestRepository.findById(id).orElseThrow();
+        existingRequest.setStatus("rejected");
+        return requestRepository.save(existingRequest);
+    }
+
+    public Long getCount(){
+        return requestRepository.count();
     }
 
 

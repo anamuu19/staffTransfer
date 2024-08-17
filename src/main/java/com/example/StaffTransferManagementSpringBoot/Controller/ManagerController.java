@@ -73,4 +73,9 @@ public class ManagerController {
     return ResponseEntity.ok(response);
 
   }
+
+  @GetMapping("/manager/count")
+  public ResponseEntity<?> getCount(){
+    return ResponseEntity.ok(managerService.getCount());
+  }
 }

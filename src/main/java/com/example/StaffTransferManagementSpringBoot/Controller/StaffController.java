@@ -56,4 +56,9 @@ public class StaffController {
     return ResponseEntity.ok(response);
 
   }
+
+  @GetMapping("/staff/count")
+  public ResponseEntity<?> getCount(){
+    return ResponseEntity.ok(staffService.getCount());
+  }
 }

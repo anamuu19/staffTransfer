@@ -35,9 +35,13 @@ public class StaffService {
     staff1.setEmail(staff.getEmail());
     staff1.setPhoneNumber(staff.getPhoneNumber());
     staff1.setGender(staff.getGender());
-//    staff1.setInstitution(staff.getInstitution());
+    staff1.setInstitution(staff.getInstitution());
     Staff updateStaff = staffRepository.save(staff1);
     return updateStaff;
+  }
+
+  public Long getCount(){
+    return staffRepository.count();
   }
 
 }

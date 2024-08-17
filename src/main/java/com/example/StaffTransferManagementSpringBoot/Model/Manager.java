@@ -19,6 +19,8 @@ public class Manager {
   private String phoneNumber;
   private String address;
   private String gender;
+
+
 //  @ManyToOne
 //  @JoinColumn(name = "institution_id", referencedColumnName = "institution_id")
 //  private Institution institution;
