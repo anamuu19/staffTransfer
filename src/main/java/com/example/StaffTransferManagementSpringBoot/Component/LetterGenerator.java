@@ -38,7 +38,7 @@ public class LetterGenerator {
         String mName = request.getMiddleName();
         String lName = request.getLastName();
         String currentInstitution = request.getCurrent_institution();
-        String desiredInstitution = request.getInstitution();
+        String desiredInstitution = request.getInstitution().getName();  // Extract institution name
 
         // Set the formatted date
         LocalDate currentDate = LocalDate.now();
@@ -58,11 +58,11 @@ public class LetterGenerator {
 
             // Add logo image
             Image jpg = Image.getInstance(getClass().getResource("/static/logo.jpg"));
-            jpg.scaleAbsolute(150, 110); // Increased width and height
+            jpg.scaleAbsolute(150, 110);
             jpg.setAlignment(Element.ALIGN_LEFT);
 
             // Create header with institution details
-            Font headerFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL); // Renamed font variable for header
+            Font headerFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
 
             // Create the header paragraph
             Paragraph header = new Paragraph("THE STATE UNIVERSITY OF ZANZIBAR\nP.O.BOX 146\n" +
@@ -73,7 +73,7 @@ public class LetterGenerator {
             // Create a table to align logo and header
             PdfPTable table = new PdfPTable(2);
             table.setWidthPercentage(100);
-            table.setWidths(new int[] {1, 3}); // Adjust column widths as needed
+            table.setWidths(new int[] {1, 3});
 
             // Add the logo image to the first cell
             PdfPCell cell = new PdfPCell(jpg);
@@ -105,10 +105,10 @@ public class LetterGenerator {
             subject.setAlignment(Element.ALIGN_CENTER);
             document.add(subject);
 
-            // Details about the student/request
+            // Details about the staff/request
             Font boldFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
 
-// Details about the staff/request
+            // Details about the staff/request
             Phrase staffName = new Phrase(fName + " " + mName + " " + lName, boldFont);
             Paragraph content = new Paragraph();
             content.add(new Phrase("This letter is to notify you that "));
@@ -121,6 +121,7 @@ public class LetterGenerator {
 
             content.setAlignment(Element.ALIGN_LEFT);
             document.add(content);
+
             // Signature and closing
             Image sign = Image.getInstance(getClass().getResource("/static/sign.jpg"));
             sign.scaleAbsolute(80, 50);

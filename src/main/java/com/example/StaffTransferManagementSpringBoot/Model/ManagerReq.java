@@ -29,14 +29,17 @@ public class ManagerReq {
 
     @Column(name = "Current_Institution")
     private String current_institution;
-    @Column(name = "Desired_Institution")
-    private String institution;
+//    @Column(name = "Desired_Institution")
+//    private String institution;
     @Column(name = "Reason_For_Transfer")
     private String reason_for_transfer;
     @Column(name = "Date_Of_Submission")
     private String date;
     @Column(name = "Status")
     private String status;
+    @ManyToOne
+    @JoinColumn(name = "institution_id", referencedColumnName = "institution_id")
+    private Institution institution;
 
 
 

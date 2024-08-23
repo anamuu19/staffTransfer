@@ -1,5 +1,6 @@
 package com.example.StaffTransferManagementSpringBoot.Service;
 
+import com.example.StaffTransferManagementSpringBoot.Exception.ResourceNotFoundException;
 import com.example.StaffTransferManagementSpringBoot.Model.Request;
 //import com.example.StaffTransferManagementSpringBoot.Model.Staff;
 import com.example.StaffTransferManagementSpringBoot.Model.Staff;
@@ -51,7 +52,7 @@ public class RequestService {
         req.setEmail(request.getEmail());
         req.setPhoneNumber(request.getPhoneNumber());
         req.setGender(request.getGender());
-        req.setCurrent_institution(request.getCurrent_institution());
+//        req.setCurrent_institution(request.getCurrent_institution());
         req.setInstitution(request.getInstitution());
         req.setReason_for_transfer(request.getReason_for_transfer());
         req.setDate(request.getDate());
@@ -78,6 +79,17 @@ public class RequestService {
     public Long getCount(){
         return requestRepository.count();
     }
+    public void acceptRequest(int id) {
+        Request request = requestRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Request not found"));
+        request.setStatus("accepted");
+        requestRepository.save(request);
+    }
+    public List<Request> getRequestsByEmail(String email) {
+        return requestRepository.findByEmail(email);
+    }
+
+
 
 
 

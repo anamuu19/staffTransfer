@@ -5,12 +5,14 @@ import com.example.StaffTransferManagementSpringBoot.Model.Institution;
 import com.example.StaffTransferManagementSpringBoot.Repository.InstitutionRepository;
 import com.example.StaffTransferManagementSpringBoot.Service.InstitutionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/url")
@@ -61,6 +63,14 @@ public class InstitutionController {
   public ResponseEntity<?> getCount(){
     return ResponseEntity.ok(institutionService.getCount());
   }
+
+  @GetMapping("/institution/name/{name}")
+  public ResponseEntity<Integer> getInstitutionIdByName(@PathVariable String name) {
+    Optional<Integer> institutionId = institutionService.getInstitutionIdByName(name);
+    return institutionId.map(id -> ResponseEntity.ok(id))
+            .orElseGet(() -> ResponseEntity.notFound().build());
+  }
+
 
 
 }

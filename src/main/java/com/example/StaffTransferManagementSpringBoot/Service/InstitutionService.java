@@ -48,6 +48,10 @@ public class InstitutionService {
   public Long getCount(){
     return institutionRepository.count();
   }
+  public Optional<Integer> getInstitutionIdByName(String name) {
+    Optional<Institution> institution = institutionRepository.findByName(name);
+    return institution.map(Institution::getId);
+  }
 
 
 }

@@ -5,6 +5,7 @@ import com.example.StaffTransferManagementSpringBoot.Model.Request;
 import com.example.StaffTransferManagementSpringBoot.Repository.RequestRepository;
 import com.example.StaffTransferManagementSpringBoot.Service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -65,6 +66,11 @@ public class RequestController {
         Request updatedRequest = requestService.rejectRequest(id, request);
         return ResponseEntity.ok(updatedRequest);
     }
+    @GetMapping("/accepted")
+    public List<Request> getAcceptedRequests() {
+        return requestRepository.findByStatus("accepted");
+    }
+
 
 //    @PutMapping("/confirm/{id}")
 //    public ResponseEntity<?> confirmRequest(@PathVariable("id") int id, @RequestBody ConfirmedRequest confirmedRequest) {
@@ -105,6 +111,23 @@ public class RequestController {
     public ResponseEntity<?> getCount(){
         return ResponseEntity.ok(requestService.getCount());
     }
+
+    @PostMapping("/api/requests/{id}/accept")
+    public ResponseEntity<?> acceptRequest(@PathVariable int id) {
+        try {
+            requestService.acceptRequest(id);
+            return ResponseEntity.ok().body("Request accepted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/requests/user/{email}")
+    public List<Request> getRequestsByUserEmail(@PathVariable String email) {
+        return requestService.getRequestsByEmail(email);
+    }
+
+
 
 
 
