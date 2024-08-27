@@ -3,6 +3,9 @@ package com.example.StaffTransferManagementSpringBoot.Model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Entity
 @Table(name = "Manager_request")
 @Data
@@ -34,7 +37,7 @@ public class ManagerReq {
     @Column(name = "Reason_For_Transfer")
     private String reason_for_transfer;
     @Column(name = "Date_Of_Submission")
-    private String date;
+    private LocalDate date;
     @Column(name = "Status")
     private String status;
     @ManyToOne

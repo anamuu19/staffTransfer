@@ -70,11 +70,13 @@ public class RequestService {
         return requestRepository.save(existingRequest);
     }
 
-    public Request rejectRequest(int id,Request request) {
-        Request existingRequest = requestRepository.findById(id).orElseThrow();
+    public Request rejectRequest(int id, Request request) {
+        Request existingRequest = requestRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Request not found with id " + id));
         existingRequest.setStatus("rejected");
         return requestRepository.save(existingRequest);
     }
+
 
     public Long getCount(){
         return requestRepository.count();

@@ -63,9 +63,14 @@ public class RequestController {
 
     @PutMapping("/reject/{id}")
     public ResponseEntity<?> rejectRequest(@PathVariable int id, @RequestBody Request request) {
-        Request updatedRequest = requestService.rejectRequest(id, request);
-        return ResponseEntity.ok(updatedRequest);
+        try {
+            Request updatedRequest = requestService.rejectRequest(id, request);
+            return ResponseEntity.ok(updatedRequest);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
+
     @GetMapping("/accepted")
     public List<Request> getAcceptedRequests() {
         return requestRepository.findByStatus("accepted");

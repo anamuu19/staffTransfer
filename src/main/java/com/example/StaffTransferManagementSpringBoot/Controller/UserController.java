@@ -20,7 +20,6 @@ public class UserController {
   private UserService userService;
   @Autowired
   private UserRepository userRepository;
-
   @PostMapping("/register")
   public User Register(@RequestBody User user){
     return userService.register(user);
